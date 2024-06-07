@@ -1,6 +1,3 @@
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # About Pomodoro App Challenge: 
 LINK: https://www.frontendmentor.io/challenges/pomodoro-app-KBFnycJ6G 
 
@@ -17,6 +14,8 @@ Customize the appearance of the app with the ability to set preferences for colo
 
 > Personal notes: I will not be using frontendmentor design for now. But I wil implement the functionality. 
 
+## Board
+You can see future features here: https://github.com/users/lemonpeu/projects/2/views/1
 
 ## Getting Started
 
