@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Varela+Round&display=swap');
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,10 +10,23 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  height: 100%;
 }
 
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+
+main {
+  height: 100%;
+}
+
+button {
+  background: none;
+  border: none;
+  font-family: "Comfortaa", sans-serif;
+  padding: 5px;
 }

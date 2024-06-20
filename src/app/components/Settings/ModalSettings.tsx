@@ -8,10 +8,11 @@ import css from "@/app/common.module.css";
 
 interface ModalSettingsProps {
   closeModal: () => void;
+  onSaveModal: (work: number, rest: number) => void;
 }
 
 // Component -> Name: ModalSettings
-const ModalSettings = ({ closeModal }: ModalSettingsProps) => {
+const ModalSettings = ({ closeModal, onSaveModal }: ModalSettingsProps) => {
   const [workTime, setWorkTime] = useLocalStorage("workTimer");
   const [restTime, setRestValue] = useLocalStorage("restTimer");
   const [workTimer, setWorkTimer] = useState(25);
@@ -24,14 +25,8 @@ const ModalSettings = ({ closeModal }: ModalSettingsProps) => {
     }
   }, []);
 
-  const onSave = () => {
-    setWorkTime("workTimer", workTimer);
-    setRestValue("restTimer", restTimer);
-    closeModal();
-  };
-
   return (
-    <Modal title="Settings" closeModal={closeModal} saveModal={() => onSave()}>
+    <Modal title="Settings" closeModal={closeModal} saveModal={() => onSaveModal(workTimer, restTimer)}>
       <div>
         <p>Timer:</p>
         <div className={css.flex}>
