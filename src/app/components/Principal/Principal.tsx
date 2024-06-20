@@ -5,13 +5,15 @@
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@/app/hooks/useLocalStorage";
 import css from "./principal.module.css";
+import common from "@/app/common.module.css";
 import ModalSettings from "@/app/components/Settings/ModalSettings";
+import Button from "@/app/components/common/button/Button";
 
 // Component -> Name: Principal
 
 const Principal = () => {
-  const [workTime, setWorkTime] = useLocalStorage("workTimer");
-  const [restTime, setValue] = useLocalStorage("restTimer");
+  const [workTimeStorage, setWorkTimeStorage] = useLocalStorage("workTimer");
+  const [restTimeStorage, setRestTimeStorage] = useLocalStorage("restTimer");
   //Work
   const [workTimer, setWorkTimer] = useState(25); //25 seconds is the default time for countdown
   //Rest
@@ -21,9 +23,9 @@ const Principal = () => {
   const [pause, setPause] = useState(false);
 
   useEffect(() => {
-    if (workTime !== undefined && restTime !== undefined) {
-      setWorkTimer(workTime);
-      setRestTime(restTime);
+    if (workTimeStorage !== undefined && restTimeStorage !== undefined) {
+      setWorkTimer(workTimeStorage);
+      setRestTime(restTimeStorage);
     }
   }, []);
 
@@ -31,7 +33,6 @@ const Principal = () => {
   useEffect(() => {
     let intervalId: ReturnType<typeof setTimeout>;
     if (!pause && workTimer > 0) {
-      // setRestTime(5)
       intervalId = setInterval(() => {
         setWorkTimer((time: any) => time - 1);
       }, 1000);
@@ -40,8 +41,7 @@ const Principal = () => {
       };
     }
     if (workTimer === 0 && restTimer === 0) {
-      console.log("Line 41");
-      setRestTime(restTime);
+      setRestTime(restTimeStorage);
     }
     // CLear always
     return () => {
@@ -61,7 +61,7 @@ const Principal = () => {
       };
     }
     if (restTimer === 0 && workTimer === 0) {
-      setWorkTimer(workTime);
+      setWorkTimer(workTimeStorage);
     }
     // CLear always
     return () => {
@@ -69,43 +69,47 @@ const Principal = () => {
     };
   }, [restTimer, workTimer, pause]);
 
+
   // Modal
-  const onSaveModal = (work: number, rest: number) => {
+  const saveModal = (work: number, rest: number) => {
     setIsModalOpen(false);
-    setWorkTimer(work);
-    setRestTime(rest);
+    setWorkTimeStorage("workTimer", work);
+    setRestTimeStorage("restTimer", rest);
     setPause(false);
   };
 
   const onOpenModal = () => {
-    setPause(true)
-    setIsModalOpen(true)
-  }
+    setPause(true);
+    setIsModalOpen(true);
+  };
 
   const onCloseModal = () => {
-    setPause(false)
-    setIsModalOpen(false)
-  }
+    setPause(false);
+    setIsModalOpen(false);
+  };
 
-  //Todo: Change style! Asap
   return (
     <>
       {isModalOpen && (
         <ModalSettings
-          saveModal={(work, rest) => onSaveModal(work, rest)}
+          onSaveModal={(work, rest) => saveModal(work, rest)}
           closeModal={() => onCloseModal()}
         />
       )}
-      <div>
+      <div className={`${css.container} ${common.allCenter}`}>
         {restTimer > 0 && workTimer <= 0 ? (
-          <p className={css.principal}>Descanso: {restTimer}</p>
+          <p className={css.title}>Rest</p>
         ) : (
-          <p className={css.principal}>Trabajo: {workTimer}</p>
+          <p className={css.title}>Working!</p>
         )}
-        <button onClick={() => setPause(true)}>Pause</button>
-        <button onClick={() => setPause(false)}>Continue</button>
-        <button onClick={() => setWorkTimer(0)}>Start Over</button>
-        <button onClick={() => onOpenModal()}>Open settings</button>
+        <p className={css.title}>
+          {restTimer > 0 && workTimer <= 0 ? restTimer : workTimer}
+        </p> 
+        <div className={css.buttons}>
+          <Button text={pause ? "Continue" : "Pause"} onClick={() => setPause(!pause)} imageSrc={pause ? "/play-button.png" : "/video-pause-button.png"}></Button>
+          <Button text="Restart" onClick={() => setWorkTimer(0)} imageSrc="/restart.png"></Button>
+          <Button text="Settings" onClick={() => onOpenModal()} imageSrc="/setting.png"></Button>
+        </div>
       </div>
     </>
   );

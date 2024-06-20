@@ -10,7 +10,7 @@
 .subContainer {
     background-color: #ffffff;
     width: 500px;
-    height: 400px;
+    height: 220px;
     border-radius: 25px;
     position: absolute;
     top: 50%;
@@ -20,4 +20,25 @@
 
 .content {
     padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btnContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.btnContainer button {
+    width: 50%;
+    border-radius: 10px;
+}
+
+.save {
+    background-color: #FFB627;
+}
+
+.cancel {
+    border: 1px solid #FFB627;
 }

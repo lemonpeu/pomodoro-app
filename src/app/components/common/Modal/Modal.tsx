@@ -30,9 +30,9 @@ const Modal = ({
         <div className={css.content}>
           <h2>{title}</h2>
           <div>{children}</div>
-          <div>
-            <button onClick={() => closeModal()}>{cancelBtn}</button>
-            <button onClick={() => saveModal()}>{saveBtn}</button>
+          <div className={css.btnContainer}>
+            <button className={css.cancel}  onClick={() => closeModal()}>{cancelBtn}</button>
+            <button className={css.save} onClick={() => saveModal()}>{saveBtn}</button>
           </div>
         </div>
       </div>
