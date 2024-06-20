@@ -17,6 +17,7 @@ Customize the appearance of the app with the ability to set preferences for colo
 
 > Personal notes: I will not be using frontendmentor design for now. But I wil implement the functionality. 
 
+Credits: https://www.flaticon.com/ For icons.
 
 ## Getting Started
 

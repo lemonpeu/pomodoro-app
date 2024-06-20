@@ -5,8 +5,9 @@
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@/app/hooks/useLocalStorage";
 import css from "./principal.module.css";
-import common from "../common.module.css";
+import common from "@/app/common.module.css";
 import ModalSettings from "@/app/components/Settings/ModalSettings";
+import Button from "@/app/components/common/button/Button";
 
 // Component -> Name: Principal
 
@@ -32,7 +33,6 @@ const Principal = () => {
   useEffect(() => {
     let intervalId: ReturnType<typeof setTimeout>;
     if (!pause && workTimer > 0) {
-      // setRestTime(5)
       intervalId = setInterval(() => {
         setWorkTimer((time: any) => time - 1);
       }, 1000);
@@ -88,7 +88,6 @@ const Principal = () => {
     setIsModalOpen(false);
   };
 
-  //Todo: Change style! Asap
   return (
     <>
       {isModalOpen && (
@@ -105,13 +104,11 @@ const Principal = () => {
         )}
         <p className={css.title}>
           {restTimer > 0 && workTimer <= 0 ? restTimer : workTimer}
-        </p>
+        </p> 
         <div className={css.buttons}>
-          <button onClick={() => setPause(!pause)}>
-            {pause ? "Continue" : "Pause"}
-          </button>
-          <button onClick={() => setWorkTimer(0)}>Start Over</button>
-          <button onClick={() => onOpenModal()}>Open settings</button>
+          <Button text={pause ? "Continue" : "Pause"} onClick={() => setPause(!pause)} imageSrc={pause ? "/play-button.png" : "/video-pause-button.png"}></Button>
+          <Button text="Restart" onClick={() => setWorkTimer(0)} imageSrc="/restart.png"></Button>
+          <Button text="Settings" onClick={() => onOpenModal()} imageSrc="/setting.png"></Button>
         </div>
       </div>
     </>

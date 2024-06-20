@@ -7,6 +7,12 @@
     justify-content: center;
 }
 
+.horizontalColumnCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .verticalCenter {
     display: flex;
     align-items: center;

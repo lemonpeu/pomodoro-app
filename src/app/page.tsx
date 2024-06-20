@@ -1,6 +1,6 @@
 'use client'
 
-import Principal from "./components/principal"
+import Principal from "@/app/components/Principal/Principal"
 
 export default function Home() {
   return (
